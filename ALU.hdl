@@ -1,0 +1,26 @@
+CHIP ALU {
+    IN  a[16], b[16], opcode[2];
+    OUT out[16], zero;
+    PARTS:
+
+    Add16(a=a, b=b, out=addResult);
+
+    Not16(in=b, out=notB);
+    Inc16(in=notB, out=negB);
+    Add16(a=a, b=negB, out=subResult);
+
+    And16(a=a, b=b, out=andResult);
+
+    Or16(a=a, b=b, out=orResult);
+
+    Mux4Way16(a=addResult, b=subResult, c=andResult, d=orResult, sel=opcode, out=aluResult);
+
+    And16(a=aluResult, b=true, out[0..7]=lowByte, out[8..15]=highByte);
+
+    Or8Way(in=lowByte, out=or8Way1);    
+    Or8Way(in=highByte, out=or8Way2);
+    Or(a=or8Way1, b=or8Way2, out=nonZero);
+    Not(in=nonZero, out=zero);
+
+    And16(a=aluResult, b=true, out=out);
+}
