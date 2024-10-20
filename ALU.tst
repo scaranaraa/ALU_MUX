@@ -21,25 +21,6 @@ set opcode %B11,
 eval,
 output;
 
-set a %B000000000010001,
-set b %B000000000000011;
-
-set opcode %B00,
-eval,
-output;
-
-set opcode %B01,
-eval,
-output;
-
-set opcode %B10,
-eval,
-output;
-
-set opcode %B11,
-eval,
-output;
-
 set a %B1111111111111111,
 set b %B1111111111111111;
 set opcode %B00,
@@ -76,3 +57,23 @@ output;
 set opcode %B11,
 eval,
 output;
+
+set a %B000000000010001,
+set b %B000000000000011;
+
+set opcode %B00,
+eval,
+output;
+
+set opcode %B01,
+eval,
+output;
+
+set opcode %B10,
+eval,
+output;
+
+set opcode %B11,
+eval,
+output;
+
