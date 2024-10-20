@@ -5,9 +5,7 @@ CHIP Or {
     OUT out;
 
     PARTS:
-    // First, invert both inputs using Nand gates
     Nand(a=a, b=a, out=notA);
     Nand(a=b, b=b, out=notB);
-    // Apply Nand on the inverted inputs to get OR output
     Nand(a=notA, b=notB, out=out);
 }
