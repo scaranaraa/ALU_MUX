@@ -1,5 +1,5 @@
 CHIP ALU {
-    IN  a[16], b[16], opcode[2];
+    IN  a[16], b[16], opcode[3];
     OUT out[16], zero;
     PARTS:
 
@@ -13,7 +13,12 @@ CHIP ALU {
 
     Or16(a=a, b=b, out=orResult);
 
-    Mux4Way16(a=addResult, b=subResult, c=andResult, d=orResult, sel=opcode, out=aluResult);
+    Not16(in=a, out=notA);
+
+    Xor16(a=a, b=b, out=xorResult);
+    Xnor16(a=a, b=b, out=xnorResult);
+
+    Mux8Way16(a=addResult, b=subResult, c=andResult, d=orResult, e=notA, f=notB ,g=xorResult, h=xnorResult, sel=opcode, out=aluResult);
 
     And16(a=aluResult, b=true, out[0..7]=lowByte, out[8..15]=highByte);
 
