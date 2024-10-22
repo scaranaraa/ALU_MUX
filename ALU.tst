@@ -1,79 +1,123 @@
+// ALU.tst
 load ALU.hdl,
 output-file ALU.out,
-output-list a%B1.6.1 b%B1.6.1 opcode%B1.2.2 out%B1.6.1 zero%B1.1.1;
+output-list a%B1.16.1 b%B1.16.1 opcode%B1.3.1 out%B1.16.1 zero%B1.1.1;
 
-set a %B0000000000000001,
-set b %B0000000000000010; 
-
-set opcode %B00,
+// Test ADD operation (opcode 000)
+set a %B0000000000000101,  // 5
+set b %B0000000000000011,  // 3
+set opcode %B000,          // ADD
 eval,
 output;
 
-set opcode %B01,
+// Test SUB operation (opcode 001)
+set a %B0000000000000101,  // 5
+set b %B0000000000000011,  // 3
+set opcode %B001,          // SUB
 eval,
 output;
 
-set opcode %B10,
+// Test AND operation (opcode 010)
+set a %B0000000000001111,  // 15
+set b %B0000000000000011,  // 3
+set opcode %B010,          // AND
 eval,
 output;
 
-set opcode %B11,
+// Test OR operation (opcode 011)
+set a %B0000000000001111,  // 15
+set b %B0000000000000011,  // 3
+set opcode %B011,          // OR
 eval,
 output;
 
-set a %B1111111111111111,
-set b %B1111111111111111;
-set opcode %B00,
+// Test NOT A operation (opcode 100)
+set a %B0000000000001111,  // 15
+set b %B0000000000000011,  // (b is ignored)
+set opcode %B100,          // NOT A
 eval,
 output;
 
-set opcode %B01,
+// Test NOT B operation (opcode 101)
+set a %B0000000000001111,  // (a is ignored)
+set b %B0000000000000011,  // 3
+set opcode %B101,          // NOT B
 eval,
 output;
 
-set opcode %B10,
+// Test XOR operation (opcode 110)
+set a %B0000000000001111,  // 15
+set b %B0000000000000011,  // 3
+set opcode %B110,          // XOR
 eval,
 output;
 
-set opcode %B11,
+// Test XNOR operation (opcode 111)
+set a %B0000000000001111,  // 15
+set b %B0000000000000011,  // 3
+set opcode %B111,          // XNOR
 eval,
 output;
 
+// Test zero flag (using addition that results in zero)
 set a %B0000000000000000,
-set b %B0000000000000000;
-
-set opcode %B00,
+set b %B0000000000000000,
+set opcode %B000,          // ADD
 eval,
 output;
 
-set opcode %B01,
+// Test zero flag with non-zero result
+set a %B0000000000000001,
+set b %B0000000000000001,
+set opcode %B000,          // ADD
 eval,
 output;
 
-set opcode %B10,
+// Test larger numbers
+set a %B1111111111111111,  // -1 in two's complement
+set b %B0000000000000001,  // 1
+set opcode %B000,          // ADD
 eval,
 output;
 
-set opcode %B11,
+// Test subtraction with negative result
+set a %B0000000000000011,  // 3
+set b %B0000000000000101,  // 5
+set opcode %B001,          // SUB
 eval,
 output;
 
-set a %B000000000010001,
-set b %B000000000000011;
-
-set opcode %B00,
+// Test subtraction with negative result
+set a %B0000000000100011,  // 3
+set b %B0000000010000101,  // 5
+set opcode %B001,          // SUB
 eval,
 output;
 
-set opcode %B01,
+// Test subtraction with negative result
+set a %B0000000001000011,  // 3
+set b %B0000011000000101,  // 5
+set opcode %B011,          // SUB
 eval,
 output;
 
-set opcode %B10,
+// Test subtraction with negative result
+set a %B0000000000101011,  // 3
+set b %B0000000000110101,  // 5
+set opcode %B101,          // SUB
 eval,
 output;
 
-set opcode %B11,
+// Test XNOR operation (opcode 111)
+set a %B0000000000001111,  // 15
+set b %B0000000000000011,  // 3
+set opcode %B111,          // XNOR
 eval,
 output;
 
+// Test zero flag (using addition that results in zero)
+set a %B0000000000000000,
+set b %B0000000000000000,
+set opcode %B000,          // ADD
+eval,
+output;
